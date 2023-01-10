@@ -1,0 +1,255 @@
+----- GAMESS execution script -----
+This job is running on host user
+under operating system Linux at Tue Jan 10 18:24:33 CET 2023
+Available scratch disk space (Kbyte units) at beginning of the job is
+Filesystem     1K-blocks  Used Available Use% Mounted on
+aufs             4146156  9048   4137108   1% /
+cp CH3_sym.inp /home/user/QFIII/scratch/CH3_sym.F05
+unset echo
+setenv ERICFMT /home/practiques/programas/gamess/auxdata/ericfmt.dat
+setenv MCPPATH /home/practiques/programas/gamess/auxdata/MCP
+setenv EXTBAS /dev/null
+setenv NUCBAS /dev/null
+setenv MAKEFP /home/user/QFIII/scratch/CH3_sym.efp
+setenv GAMMA /home/user/QFIII/scratch/CH3_sym.gamma
+setenv TRAJECT /home/user/QFIII/scratch/CH3_sym.trj
+setenv RESTART /home/user/QFIII/scratch/CH3_sym.rst
+setenv INPUT /home/user/QFIII/scratch/CH3_sym.F05
+setenv PUNCH /home/user/QFIII/scratch/CH3_sym.dat
+setenv AOINTS /home/user/QFIII/scratch/CH3_sym.F08
+setenv MOINTS /home/user/QFIII/scratch/CH3_sym.F09
+setenv DICTNRY /home/user/QFIII/scratch/CH3_sym.F10
+setenv DRTFILE /home/user/QFIII/scratch/CH3_sym.F11
+setenv CIVECTR /home/user/QFIII/scratch/CH3_sym.F12
+setenv CASINTS /home/user/QFIII/scratch/CH3_sym.F13
+setenv CIINTS /home/user/QFIII/scratch/CH3_sym.F14
+setenv WORK15 /home/user/QFIII/scratch/CH3_sym.F15
+setenv WORK16 /home/user/QFIII/scratch/CH3_sym.F16
+setenv CSFSAVE /home/user/QFIII/scratch/CH3_sym.F17
+setenv FOCKDER /home/user/QFIII/scratch/CH3_sym.F18
+setenv WORK19 /home/user/QFIII/scratch/CH3_sym.F19
+setenv DASORT /home/user/QFIII/scratch/CH3_sym.F20
+setenv DFTINTS /home/user/QFIII/scratch/CH3_sym.F21
+setenv DFTGRID /home/user/QFIII/scratch/CH3_sym.F22
+setenv JKFILE /home/user/QFIII/scratch/CH3_sym.F23
+setenv ORDINT /home/user/QFIII/scratch/CH3_sym.F24
+setenv EFPIND /home/user/QFIII/scratch/CH3_sym.F25
+setenv PCMDATA /home/user/QFIII/scratch/CH3_sym.F26
+setenv PCMINTS /home/user/QFIII/scratch/CH3_sym.F27
+setenv SVPWRK1 /home/user/QFIII/scratch/CH3_sym.F26
+setenv SVPWRK2 /home/user/QFIII/scratch/CH3_sym.F27
+setenv MLTPL /home/user/QFIII/scratch/CH3_sym.F28
+setenv MLTPLT /home/user/QFIII/scratch/CH3_sym.F29
+setenv DAFL30 /home/user/QFIII/scratch/CH3_sym.F30
+setenv SOINTX /home/user/QFIII/scratch/CH3_sym.F31
+setenv SOINTY /home/user/QFIII/scratch/CH3_sym.F32
+setenv SOINTZ /home/user/QFIII/scratch/CH3_sym.F33
+setenv SORESC /home/user/QFIII/scratch/CH3_sym.F34
+setenv GCILIST /home/user/QFIII/scratch/CH3_sym.F37
+setenv HESSIAN /home/user/QFIII/scratch/CH3_sym.F38
+setenv QMMMTEI /home/user/QFIII/scratch/CH3_sym.F39
+setenv SOCCDAT /home/user/QFIII/scratch/CH3_sym.F40
+setenv AABB41 /home/user/QFIII/scratch/CH3_sym.F41
+setenv BBAA42 /home/user/QFIII/scratch/CH3_sym.F42
+setenv BBBB43 /home/user/QFIII/scratch/CH3_sym.F43
+setenv MCQD50 /home/user/QFIII/scratch/CH3_sym.F50
+setenv MCQD51 /home/user/QFIII/scratch/CH3_sym.F51
+setenv MCQD52 /home/user/QFIII/scratch/CH3_sym.F52
+setenv MCQD53 /home/user/QFIII/scratch/CH3_sym.F53
+setenv MCQD54 /home/user/QFIII/scratch/CH3_sym.F54
+setenv MCQD55 /home/user/QFIII/scratch/CH3_sym.F55
+setenv MCQD56 /home/user/QFIII/scratch/CH3_sym.F56
+setenv MCQD57 /home/user/QFIII/scratch/CH3_sym.F57
+setenv MCQD58 /home/user/QFIII/scratch/CH3_sym.F58
+setenv MCQD59 /home/user/QFIII/scratch/CH3_sym.F59
+setenv MCQD60 /home/user/QFIII/scratch/CH3_sym.F60
+setenv MCQD61 /home/user/QFIII/scratch/CH3_sym.F61
+setenv MCQD62 /home/user/QFIII/scratch/CH3_sym.F62
+setenv MCQD63 /home/user/QFIII/scratch/CH3_sym.F63
+setenv MCQD64 /home/user/QFIII/scratch/CH3_sym.F64
+setenv NMRINT1 /home/user/QFIII/scratch/CH3_sym.F61
+setenv NMRINT2 /home/user/QFIII/scratch/CH3_sym.F62
+setenv NMRINT3 /home/user/QFIII/scratch/CH3_sym.F63
+setenv NMRINT4 /home/user/QFIII/scratch/CH3_sym.F64
+setenv NMRINT5 /home/user/QFIII/scratch/CH3_sym.F65
+setenv NMRINT6 /home/user/QFIII/scratch/CH3_sym.F66
+setenv DCPHFH2 /home/user/QFIII/scratch/CH3_sym.F67
+setenv DCPHF21 /home/user/QFIII/scratch/CH3_sym.F68
+setenv ELNUINT /home/user/QFIII/scratch/CH3_sym.F67
+setenv NUNUINT /home/user/QFIII/scratch/CH3_sym.F68
+setenv GVVPT /home/user/QFIII/scratch/CH3_sym.F69
+setenv NUMOIN /home/user/QFIII/scratch/CH3_sym.F69
+setenv NUMOCAS /home/user/QFIII/scratch/CH3_sym.F70
+setenv NUELMO /home/user/QFIII/scratch/CH3_sym.F71
+setenv NUELCAS /home/user/QFIII/scratch/CH3_sym.F72
+setenv GMCREF /home/user/QFIII/scratch/CH3_sym.F70
+setenv GMCO2R /home/user/QFIII/scratch/CH3_sym.F71
+setenv GMCROC /home/user/QFIII/scratch/CH3_sym.F72
+setenv GMCOOC /home/user/QFIII/scratch/CH3_sym.F73
+setenv GMCCC0 /home/user/QFIII/scratch/CH3_sym.F74
+setenv GMCHMA /home/user/QFIII/scratch/CH3_sym.F75
+setenv GMCEI1 /home/user/QFIII/scratch/CH3_sym.F76
+setenv GMCEI2 /home/user/QFIII/scratch/CH3_sym.F77
+setenv GMCEOB /home/user/QFIII/scratch/CH3_sym.F78
+setenv GMCEDT /home/user/QFIII/scratch/CH3_sym.F79
+setenv GMCERF /home/user/QFIII/scratch/CH3_sym.F80
+setenv GMCHCR /home/user/QFIII/scratch/CH3_sym.F81
+setenv GMCGJK /home/user/QFIII/scratch/CH3_sym.F82
+setenv GMCGAI /home/user/QFIII/scratch/CH3_sym.F83
+setenv GMCGEO /home/user/QFIII/scratch/CH3_sym.F84
+setenv GMCTE1 /home/user/QFIII/scratch/CH3_sym.F85
+setenv GMCTE2 /home/user/QFIII/scratch/CH3_sym.F86
+setenv GMCHEF /home/user/QFIII/scratch/CH3_sym.F87
+setenv GMCMOL /home/user/QFIII/scratch/CH3_sym.F88
+setenv GMCMOS /home/user/QFIII/scratch/CH3_sym.F89
+setenv GMCWGT /home/user/QFIII/scratch/CH3_sym.F90
+setenv GMCRM2 /home/user/QFIII/scratch/CH3_sym.F91
+setenv GMCRM1 /home/user/QFIII/scratch/CH3_sym.F92
+setenv GMCR00 /home/user/QFIII/scratch/CH3_sym.F93
+setenv GMCRP1 /home/user/QFIII/scratch/CH3_sym.F94
+setenv GMCRP2 /home/user/QFIII/scratch/CH3_sym.F95
+setenv GMCVEF /home/user/QFIII/scratch/CH3_sym.F96
+setenv GMCDIN /home/user/QFIII/scratch/CH3_sym.F97
+setenv GMC2SZ /home/user/QFIII/scratch/CH3_sym.F98
+setenv GMCCCS /home/user/QFIII/scratch/CH3_sym.F99
+unset echo
+/home/practiques/programas/gamess/ddikick.x /home/practiques/programas/gamess/gamess.14.x CH3_sym -ddi 1 4 user:cpus=4 -scr /home/user/QFIII/scratch
+
+ Distributed Data Interface kickoff program.
+ Initiating 4 compute processes on 1 nodes to run the following command:
+ /home/practiques/programas/gamess/gamess.14.x CH3_sym 
+
+          ******************************************************
+          *         GAMESS VERSION =  5 DEC 2014 (R1)          *
+          *             FROM IOWA STATE UNIVERSITY             *
+          * M.W.SCHMIDT, K.K.BALDRIDGE, J.A.BOATZ, S.T.ELBERT, *
+          *   M.S.GORDON, J.H.JENSEN, S.KOSEKI, N.MATSUNAGA,   *
+          *          K.A.NGUYEN, S.J.SU, T.L.WINDUS,           *
+          *       TOGETHER WITH M.DUPUIS, J.A.MONTGOMERY       *
+          *         J.COMPUT.CHEM.  14, 1347-1363(1993)        *
+          **************** 32 BIT LINUX VERSION ****************
+
+  SINCE 1993, STUDENTS AND POSTDOCS WORKING AT IOWA STATE UNIVERSITY
+  AND ALSO IN THEIR VARIOUS JOBS AFTER LEAVING ISU HAVE MADE IMPORTANT
+  CONTRIBUTIONS TO THE CODE:
+     IVANA ADAMOVIC, CHRISTINE AIKENS, YURI ALEXEEV, POOJA ARORA,
+     ANDREY ASADCHEV, ROB BELL, PRADIPTA BANDYOPADHYAY, JONATHAN BENTZ,
+     BRETT BODE, KURT BRORSEN, CALEB CARLIN, GALINA CHABAN, WEI CHEN,
+     CHEOL HO CHOI, PAUL DAY, ALBERT DEFUSCO, NUWAN DESILVA, TIM DUDLEY,
+     DMITRI FEDOROV, GRAHAM FLETCHER, MARK FREITAG, KURT GLAESEMANN,
+     DAN KEMP, GRANT MERRILL, NORIYUKI MINEZAWA, JONATHAN MULLIN,
+     TAKESHI NAGATA, SEAN NEDD, HEATHER NETZLOFF, BOSILJKA NJEGIC, RYAN OLSON,
+     MIKE PAK, SPENCER PRUITT, LUKE ROSKOP, JIM SHOEMAKER, LYUDMILA SLIPCHENKO,
+     TONY SMITH, SAROM SOK, JIE SONG, TETSUYA TAKETSUGU, SIMON WEBB,
+     PENG XU, SOOHAENG YOO, FEDERICO ZAHARIEV
+
+  ADDITIONAL CODE HAS BEEN PROVIDED BY COLLABORATORS IN OTHER GROUPS:
+     IOWA STATE UNIVERSITY:
+          JOE IVANIC, AARON WEST, LAIMUTIS BYTAUTAS, KLAUS RUEDENBERG
+     UNIVERSITY OF TOKYO: KIMIHIKO HIRAO, TAKAHITO NAKAJIMA,
+          TAKAO TSUNEDA, MUNEAKI KAMIYA, SUSUMU YANAGISAWA,
+          KIYOSHI YAGI, MAHITO CHIBA, SEIKEN TOKURA, NAOAKI KAWAKAMI
+     UNIVERSITY OF AARHUS: FRANK JENSEN
+     UNIVERSITY OF IOWA: VISVALDAS KAIRYS, HUI LI
+     NATIONAL INST. OF STANDARDS AND TECHNOLOGY: WALT STEVENS, DAVID GARMER
+     UNIVERSITY OF PISA: BENEDETTA MENNUCCI, JACOPO TOMASI
+     UNIVERSITY OF MEMPHIS: HENRY KURTZ, PRAKASHAN KORAMBATH
+     UNIVERSITY OF ALBERTA: TOBY ZENG, MARIUSZ KLOBUKOWSKI
+     UNIVERSITY OF NEW ENGLAND: MARK SPACKMAN
+     MIE UNIVERSITY: HIROAKI UMEDA
+     NAT. INST. OF ADVANCED INDUSTRIAL SCIENCE AND TECHNOLOGY: KAZUO KITAURA
+     MICHIGAN STATE UNIVERSITY:
+          KAROL KOWALSKI, MARTA WLOCH, JEFFREY GOUR, JESSE LUTZ,
+          WEI LI, PIOTR PIECUCH
+     UNIVERSITY OF SILESIA: MONIKA MUSIAL, STANISLAW KUCHARSKI
+     FACULTES UNIVERSITAIRES NOTRE-DAME DE LA PAIX:
+          OLIVIER QUINET, BENOIT CHAMPAGNE
+     UNIVERSITY OF CALIFORNIA - SANTA BARBARA: BERNARD KIRTMAN
+     INSTITUTE FOR MOLECULAR SCIENCE:
+          KAZUYA ISHIMURA, MICHIO KATOUDA, AND SHIGERU NAGASE
+     UNIVERSITY OF NOTRE DAME: ANNA POMOGAEVA, DAN CHIPMAN
+     KYUSHU UNIVERSITY:
+          HARUYUKI NAKANO,
+          FENG LONG GU, JACEK KORCHOWIEC, MARCIN MAKOWSKI, AND YURIKO AOKI,
+          HIROTOSHI MORI AND EISAKU MIYOSHI
+     PENNSYLVANIA STATE UNIVERSITY:
+          TZVETELIN IORDANOV, CHET SWALINA, JONATHAN SKONE,
+          SHARON HAMMES-SCHIFFER
+     WASEDA UNIVERSITY:
+          MASATO KOBAYASHI, TOMOKO AKAMA, TSUGUKI TOUMA,
+          TAKESHI YOSHIKAWA, YASUHIRO IKABATA, HIROMI NAKAI
+     NANJING UNIVERSITY: SHUHUA LI
+     UNIVERSITY OF NEBRASKA:
+          PEIFENG SU, DEJUN SI, NANDUN THELLAMUREGE, YALI WANG, HUI LI
+     UNIVERSITY OF ZURICH: ROBERTO PEVERATI, KIM BALDRIDGE
+     N. COPERNICUS UNIVERSITY AND JACKSON STATE UNIVERSITY:
+          MARIA BARYSZ
+     UNIVERSITY OF COPENHAGEN: CASPER STEINMANN
+     TOKYO INSTITUTE OF TECHNOLOGY: HIROYA NAKATA
+     NAGOYA UNIVERSITY: YOSHIO NISHIMOTO, STEPHAN IRLE
+
+
+ PARALLEL VERSION RUNNING ON        4 PROCESSORS IN        1 NODES.
+
+ EXECUTION OF GAMESS BEGUN Tue Jan 10 18:24:33 2023
+
+            ECHO OF THE FIRST FEW INPUT CARDS -
+ INPUT CARD>! ================================================================              
+ INPUT CARD>! This file was generated by Gabedit                                            
+ INPUT CARD>! ================================================================              
+ INPUT CARD> $SYSTEM MWORDS=20 $END                                                         
+ INPUT CARD> $CONTRL RUNTYP=Optimize MAXIT=99 $END                                          
+ INPUT CARD> $CONTRL SCFTYP=UHF $END                                                        
+ INPUT CARD> $CONTRL MPLEVL=2  $END                                                         
+ INPUT CARD> $CONTRL ICHARG=0  MULT=2 $END                                                  
+ INPUT CARD> $STATPT  OptTol=1e-5 NStep=500 $END                                            
+ INPUT CARD> $BASIS GBASIS=N311 NGAUSS=6 $END                                               
+ INPUT CARD> $BASIS NDFUNC=1 NPFUNC=1 $END                                                  
+ INPUT CARD> $SCF DIRSCF=.TRUE. $END                                                        
+ INPUT CARD> $DATA                                                                          
+ INPUT CARD>Molecule specification                                                          
+ INPUT CARD>DNH 3                                                                           
+ INPUT CARD>    C   6          0.00000000           0.00000000           0.00000000         
+ INPUT CARD>    H   1         1.07888920           0.00000000           0.00000000          
+ INPUT CARD> $END                                                                           
+   20000000 WORDS OF MEMORY AVAILABLE
+
+     BASIS OPTIONS
+     -------------
+     GBASIS=N311         IGAUSS=       6      POLAR=POPN311 
+     NDFUNC=       1     NFFUNC=       0     DIFFSP=       F
+     NPFUNC=       1      DIFFS=       F     BASNAM=        
+
+
+     RUN TITLE
+     ---------
+ Molecule specification                                                          
+
+ THE POINT GROUP OF THE MOLECULE IS DNH     
+ THE ORDER OF THE PRINCIPAL AXIS IS     3
+ **** ERROR READING VARIABLE X0       CHECK COLUMN  5
+     C   6          0.00000000           0.00000000           0.00000000         
+ ....V....1....V....2....V....3....V....4....V....5....V....6....V....7....V....8
+ EXECUTION OF GAMESS TERMINATED -ABNORMALLY- AT Tue Jan 10 18:24:33 2023
+           0  WORDS OF DYNAMIC MEMORY USED
+ CPU     0: STEP CPU TIME=     0.00 TOTAL CPU TIME=        0.0 (    0.0 MIN)
+ TOTAL WALL CLOCK TIME=        0.0 SECONDS, CPU UTILIZATION IS   0.00%
+ DDI Process 0: error code 911
+ ddikick.x: application process 0 quit unexpectedly.
+ ddikick.x: Fatal error detected.
+ The error is most likely to be in the application, so check for
+ input errors, disk space, memory needs, application bugs, etc.
+ ddikick.x will now clean up all processes, and exit...
+ DDI Process 3: terminated upon request.
+ DDI Process 2: terminated upon request.
+ DDI Process 1: terminated upon request.
+ ddikick.x: Sending kill signal to DDI processes.
+ ddikick.x: Execution terminated due to error(s).
+unset echo
+----- accounting info -----
+Files used on the master node user were:
+-rw-rw-r-- 1 user user   101 Jan 10 18:24 /home/user/QFIII/scratch/CH3_sym.dat
+-rwxrwx--- 1 user user   626 Jan 10 18:24 /home/user/QFIII/scratch/CH3_sym.F05*
+-rw-rw-r-- 1 user user 32720 Jan 10 18:24 /home/user/QFIII/scratch/CH3_sym.F10
+Tue Jan 10 18:24:35 CET 2023
+0.0u 0.0s 0:02.06 0.0% 0+0k 0+0io 0pf+0w

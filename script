@@ -1,0 +1,8 @@
+#!/bin/bash
+
+file=$1
+
+echo "Analysing the file..."
+echo $file
+
+grep 'THE CURRENT FULLY SUBSTITUTED Z-MATRIX IS' $file

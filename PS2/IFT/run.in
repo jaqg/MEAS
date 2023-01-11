@@ -1,0 +1,91 @@
+
+#==Simulation Settings==#
+			#
+  units		real    # Define units in Å, fs, Kcal/mol, K, atm
+  boundary	p p p	# The simulation cell is periodic in all directions of the space
+  dimension 	3	# The simulation cell is 3-Dimensional
+  atom_style 	full	# Define the system as a molecular set (atoms with bonds, etc.)
+			#
+#=======================#
+
+#=========Simulation Variables==========#
+					#	
+  variable	Cutoff	equal	12	# Cutoff Distance (Å)
+  variable	T	equal	298.15 	# Temperature (K)
+  variable	P	equal	1	# Pressure (atm)
+					#
+  timestep	2			# Timestep (fs)
+  thermo	100			# Print thermo-output each 100 steps
+					#
+#---------------------------------------#
+#== Box Parameters and Molecular PPTs ==#
+					#
+  variable      X       equal   30.	# x
+  variable      Y       equal   30.	# y
+  variable      Z       equal   90.	# z dimension length (Å)
+					#
+  variable      Rho1	equal   0.65478	# Density of Hexane at 25 C (g/cm3)
+  variable      PM1	equal   86.1576	# Molar Mass of Hexane (g/mol)
+  variable      Rho2	equal   0.99705	# Density of Water at 25 C (g/cm3)
+  variable      PM2	equal   18.015	# Molar Mass of Water (g/mol)
+  					#
+#---------------------------------------#
+					#
+   molecule mol1 hexane.in 		# Load a molecule file 
+   molecule mol2 water.in 		# Load a molecule file 
+					# (you may add new molecules)
+#---------------------------------------------------------------------------------------#
+# Calculate the number of molecules to add in the sym box as a function of Rho, PM and  #
+# XYZ cell parameters this variable fills 1/2 of the simulation cell (1 var per molec)	#
+#---------------------------------------------------------------------------------------#
+   variable	N1	equal	floor(${X}*${Y}*(${Z}/3)/1e24*6.023E23*${Rho1}/${PM1})	#
+   variable	N2	equal	floor(${X}*${Y}*(${Z}/3)/1e24*6.023E23*${Rho2}/${PM2})	#
+#=======================================================================================#
+
+#=========================== Box Creation ==============================#
+									#
+  lattice custom 1. a1 $X 0. 0. a2 0. $Y 0. a3 0. 0. $Z basis 0. 0. 0.	#
+  region sym block 0 1 0 1 0 1 units lattice				#
+  create_box 4 sym bond/types 2 angle/types 2 dihedral/types 1 extra/bond/per/atom 10 extra/angle/per/atom 10 extra/dihedral/per/atom 40 extra/special/per/atom 25
+									#
+#=============== Region Definition & Atom Creation======================#	
+									#
+   region  Oil		block 	0  1   0   1   0   0.33 units lattice	# cubic region
+   create_atoms 0	random  ${N1}	238271	Oil   mol mol1 151229	# add molecs to that region
+   region  Water	block 	0  1   0   1   0.5   0.83 units lattice	# cubic region
+   create_atoms 0	random  ${N2}	917419  Water mol mol2 616351	# add molecs to that region
+									# (you may add new regions
+#=======================================================================# and new create_atoms)
+
+#=======================================================================================#
+											#
+  variable	IFT	equal	(-((zhi-zlo)/2.0)*(((pxx+pyy)/2.0)-pzz))*0.0101325 	# Calculate IFT	
+  variable      TotEng  equal etotal							# Calculate Etotal
+  fix averages  all     ave/time 1 10000 10000 	v_TotEng v_IFT 	file lammps.ave		# 
+											#
+  dump 		trj all xyz 10000 lammps.xyz     					# Write traj. each 10000 timesteps
+  thermo_style 	custom step temp press vol pe ke etotal	v_IFT				# What to print (you may add new keys) 
+											#
+#=======================================================================================# 
+
+#======= Minimization Process With Soft Potential ======#
+							#
+  include	potential.ff				# Load the whole FF
+							#
+  pair_style 	soft 	3				# Change the LJ pair by Soft
+  pair_coeff 	* * 	1				# Soft parameters
+  kspace_style 	none					# Erase the long range coulombics
+							#
+  fix label1 all rigid/nvt molecule temp 10 10 200	# Time evolution scheme
+    run 10000						# run during 10000 steps
+  unfix label1 						# Erase time evolution scheme
+							#
+#========= Simulation With Appropiate Potential ========#
+							#
+  include	potential.ff				# Load the whole FF
+  fix label1 all npt temp $T $T 200 z $P $P 1000	# Time evolution scheme
+    run 200000						# run during 200000 steps
+  unfix label1						# Erase time evolution scheme
+							#
+#=======================================================#
+

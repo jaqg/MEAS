@@ -1,3 +1,3 @@
 #!/bin/bash
 
-xrandr --current -s 1680x1050
+xrandr --current -s 1280x800

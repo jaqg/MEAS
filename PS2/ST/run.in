@@ -1,0 +1,85 @@
+
+#==Simulation Settings==#
+			#
+  units		real    # Define units in Å, fs, kcal/mol, K, atm
+  boundary	p p p	# The simulation cell is periodic in all directions of the space
+  dimension 	3	# The simulation cell is 3-Dimensional
+  atom_style 	full	# Define the system as a molecular set (atoms with bonds or no-bonds, etc)
+			#
+#=======================#
+
+#=========Simulation Variables==========#
+					#	
+  variable	Cutoff	equal	12	# Cutoff Distance for intermolecular interactions (Å)
+  variable	T	equal	298.15	# Temperature (K)
+					#
+  timestep	2			# Timestep (fs)
+  thermo	100			# Print thermodynamic output each 100 steps
+					#
+#---------------------------------------#
+#== Box Parameters and Molecular PPTs ==#
+					#
+  variable      X       equal   30.0	# x
+  variable      Y       equal   30.0	# y
+  variable      Z       equal   90.0	# z dimension length (Å)
+					#
+  variable      Rho1	equal   0.65478	# Density of Hexane at 25 C (g/cm3)
+  variable      PM1	equal   86.1756	# Molar Mass of Hexane (g/mol)
+					#
+#----------Load Molecules---------------#
+					#
+   molecule mol1 hexane.in 		# Load a molecule file 
+					# (you may add new molecules)
+#---------------------------------------------------------------------------------------#
+# Calculate the number of molecules to add in the sym box as a function of Rho, PM and  #
+# XYZ cell parameters this variable fills 1/3 of the simulation cell (1 var per molec)	#
+#---------------------------------------------------------------------------------------#
+   variable	N1	equal	floor(${X}*${Y}*(${Z}/3)/1e24*6.023E23*${Rho1}/${PM1})	#
+#=======================================================================================#
+
+#=========================== Box Creation ==============================#
+									#
+  lattice custom 1. a1 $X 0. 0. a2 0. $Y 0. a3 0. 0. $Z basis 0. 0. 0.	#
+  region sym block 0 1 0 1 0 1 units lattice				#
+  create_box 4 sym bond/types 2 angle/types 2 dihedral/types 1 extra/bond/per/atom 10 extra/angle/per/atom 10 extra/dihedral/per/atom 40 extra/special/per/atom 25
+									#
+#=============== Region Definition & Atom Creation======================#	
+									#
+   region  Liquid	block 	0  1   0   1   0   0.33 units lattice	# cubic region
+   create_atoms 0	random  ${N1}	298437	Liquid mol mol1 301709	# add molecs to that region
+									# (you may add new regions
+#=======================================================================# and new create_atoms)
+
+#================================OUTPUT VARIABLES=======================================#
+											#
+  variable	IFT	equal	(-((zhi-zlo)/2.0)*(((pxx+pyy)/2.0)-pzz))*0.0101325 	# Calculate IFT	
+  variable      TotEng  equal etotal							# Calculate Etotal
+  fix averages  all     ave/time 1 10000 10000 	v_TotEng v_IFT 	file lammps.ave         # 
+											#
+  dump 		trj all xyz 10000 lammps.xyz     					# Write traj. each 10K timesteps
+  thermo_style 	custom step temp pzz vol pe ke etotal	v_IFT				# What to print (you may add new keys) 
+											#
+#=======================================================================================# 
+
+#======= Minimization Process With Soft Potential ======#
+							#
+  include	potential.ff				# Load the whole FF
+							#
+  pair_style soft 3					# Change the LJ pair by Soft
+  pair_coeff * * 1					# Soft parameters
+							#
+  fix label1 all rigid/nvt molecule temp 10 10 200	# Time evolution scheme
+    run 10000						# run during 10000 steps
+  unfix label1 						# Erase time evolution scheme
+							#
+#========= Simulation With Appropiate Potential ========#
+							#
+  include	potential.ff				# Load the whole FF
+							#
+  fix label1 all nvt temp $T $T 200			# Time evolution scheme
+    run 100000						# run during 100000 steps
+  unfix label1						# Erase time evolution scheme
+							#
+							#
+#=======================================================#
+

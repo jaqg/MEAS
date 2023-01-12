@@ -1,0 +1,55 @@
+
+# -------------------- Init Section -----------------------
+
+units               real
+boundary            p p p
+atom_style          full
+pair_style          lj/cut/coul/long 12.0
+kspace_style        ewald 1.0e-5
+
+# -------------------- Atom Definition Section ------------
+
+read_data           silicalite.in #extra/angle/types 1
+group               faujasite type 1 2 3
+
+molecule            CO2 CO2.in offset 3 1 0 0 0
+group               CO2 type 4 5
+
+group               O type 1 # O(FAU)
+group               Si type 2 # Si(FAU)
+group               sodalite type 3 # dummy atoms
+
+set                 group O charge -0.39299
+set                 group Si charge 0.78598
+set                 group sodalite charge 0.00000
+
+pair_coeff          * * 0.0 0.0        # Si(FAU) - O(FAU) no interaction
+pair_coeff          2 4 0.0 0.0        # Si(FAU) - C(CO2) no vdW interaction
+pair_coeff          2 5 0.0 0.0        # Si(FAU) - O(CO2) no vdW interaction
+pair_coeff          1 4 0.07471 3.511  # O(FAU) - C(CO2) vdW
+pair_coeff          1 5 0.15695 3.237  # O(FAU) - O(CO2) vdW
+pair_coeff          4 4 0.05960 2.745  # C(CO2) - C(CO2) vdW
+pair_coeff          4 5 0.10063 2.880  # C(CO2) - O(CO2) vdW
+pair_coeff          5 5 0.17024 3.017  # O(CO2) - O(CO2) vdW
+pair_coeff          3 4 0.00100 3.000  # sodalite - C(CO2) repulsive
+pair_coeff          3 5 0.00100 3.000  # sodalite - O(CO2) repulsive
+
+# -------------------- Settings Section -------------------
+
+compute_modify      thermo_temp dynamic yes
+neighbor            2 bin
+neigh_modify        every 1 delay 0 check no one 100000 page 5000000
+neigh_modify        exclude group faujasite faujasite
+variable            CO2ad equal (atoms-584)/3
+
+# -------------------- Run Section ------------------------
+
+fix                 1 faujasite rigid single force 1 off off off torque 1 off off off
+fix                 averages all ave/time 50 51 5000 v_CO2ad file lammps.ave 
+fix                 fxgc CO2 gcmc 1 1 1 0 123456789 303.15 -0.5 0.5 mol CO2 pressure 10 full_energy
+
+thermo 50
+thermo_style        custom step v_CO2ad pe density temp
+
+run 10000
+

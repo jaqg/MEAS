@@ -51,5 +51,5 @@ fix                 fxgc CO2 gcmc 1 1 1 0 123456789 303.15 -0.5 0.5 mol CO2 pres
 thermo 50
 thermo_style        custom step v_CO2ad pe density temp
 
-run 5000
+run 20000
 

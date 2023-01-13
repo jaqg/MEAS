@@ -46,7 +46,7 @@ variable            CO2ad equal (atoms-584)/3
 
 fix                 1 faujasite rigid single force 1 off off off torque 1 off off off
 fix                 averages all ave/time 50 51 5000 v_CO2ad file lammps.ave 
-fix                 fxgc CO2 gcmc 1 1 1 0 123456789 303.15 -0.5 0.5 mol CO2 pressure 50 full_energy
+fix                 fxgc CO2 gcmc 1 1 1 0 123456789 303.15 -0.5 0.5 mol CO2 pressure 200 full_energy
 
 thermo 50
 thermo_style        custom step v_CO2ad pe density temp
